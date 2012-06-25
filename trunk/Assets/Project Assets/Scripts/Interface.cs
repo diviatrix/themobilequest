@@ -36,8 +36,10 @@ public class Interface : MonoBehaviour {
 				Debug.Log("X:" + hit.transform.gameObject.ToString());
 				if (hit.transform.tag == "pickable"){
 					inventoryitemName = hit.transform.name;
-					inventoryitem = hit.transform.gameObject;
-					hit.transform.gameObject.active = false;
+					inventoryitem = hit.collider.gameObject;
+					Debug.Log(hit.collider.transform.position.ToString());
+					Debug.Log(hit.transform.gameObject.transform.position.ToString());
+					//hit.transform.gameObject.active = false;
 					// Если берем палку
 					if (hit.transform.name == "Plank"){
 						gotplank = true;
@@ -53,14 +55,19 @@ public class Interface : MonoBehaviour {
 							goalText ="Duh, it will keep fire burning a little more.";
 							fireburning = true;
 							inventoryitemName = null;
-							inventoryitem.gameObject.active = true;
-						//	inventoryitem.gameObject.transform.position = hit.transform.position;
+							//inventoryitem.gameObject.active = true;
+							inventoryitem.transform.position = hit.transform.position;
 							Instantiate(explosionPrefab, hit.transform.position, transform.rotation);
 							}
 						}
 				}
 				//обработка зоны подсказки
 				else if (hit.transform.tag == "tiparea" && hit.transform.name == "firehint"){
+				}
+
+				else if (hit.transform.tag == "test"){
+				
+				hit.transform.gameObject.transform.position =new Vector3 (hit.transform.position.x, hit.transform.position.y + 15, hit.transform.position.z);
 				}
 
 				if (hit.transform.name == "safe"){

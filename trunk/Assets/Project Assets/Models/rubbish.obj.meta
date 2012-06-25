@@ -40,12 +40,12 @@ ModelImporter:
   meshes:
     lODScreenPercentages: []
     globalScale: 1
-    meshCompression: 0
-    addColliders: 0
-    swapUVChannels: 0
-    generateSecondaryUV: 0
+    meshCompression: 2
+    addColliders: 1
+    swapUVChannels: 1
+    generateSecondaryUV: 1
     useFileUnits: 1
-    optimizeMesh: 0
+    optimizeMesh: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
@@ -53,7 +53,7 @@ ModelImporter:
   tangentSpace:
     normalSmoothAngle: 60
     splitTangentsAcrossUV: 1
-    normalImportMode: 0
+    normalImportMode: 1
     tangentImportMode: 1
   textMetaNamesToFileIDs:
     //RootNode:
@@ -79,6 +79,9 @@ ModelImporter:
       data:
         first: 33
         second: c65a3200
+      data:
+        first: 64
+        second: 24a86100
     Box455:
       data:
         first: 1
@@ -92,6 +95,9 @@ ModelImporter:
       data:
         first: 33
         second: c45a3200
+      data:
+        first: 64
+        second: 26a86100
     Box456:
       data:
         first: 1
@@ -105,6 +111,9 @@ ModelImporter:
       data:
         first: 33
         second: c25a3200
+      data:
+        first: 64
+        second: 1aa86100
     Box459:
       data:
         first: 1
@@ -118,6 +127,9 @@ ModelImporter:
       data:
         first: 33
         second: c05a3200
+      data:
+        first: 64
+        second: 00a86100
     Box460:
       data:
         first: 1
@@ -131,6 +143,9 @@ ModelImporter:
       data:
         first: 33
         second: be5a3200
+      data:
+        first: 64
+        second: 02a86100
     Box461:
       data:
         first: 1
@@ -144,6 +159,9 @@ ModelImporter:
       data:
         first: 33
         second: bc5a3200
+      data:
+        first: 64
+        second: 0aa86100
     Box462:
       data:
         first: 1
@@ -157,6 +175,9 @@ ModelImporter:
       data:
         first: 33
         second: ba5a3200
+      data:
+        first: 64
+        second: 0ca86100
     Box463:
       data:
         first: 1
@@ -170,6 +191,9 @@ ModelImporter:
       data:
         first: 33
         second: b85a3200
+      data:
+        first: 64
+        second: 0ea86100
     Box464:
       data:
         first: 1
@@ -183,6 +207,9 @@ ModelImporter:
       data:
         first: 33
         second: b65a3200
+      data:
+        first: 64
+        second: 10a86100
     Box465:
       data:
         first: 1
@@ -196,6 +223,9 @@ ModelImporter:
       data:
         first: 33
         second: b45a3200
+      data:
+        first: 64
+        second: 04a86100
     Box466:
       data:
         first: 1
@@ -209,6 +239,9 @@ ModelImporter:
       data:
         first: 33
         second: b25a3200
+      data:
+        first: 64
+        second: 06a86100
     Box467:
       data:
         first: 1
@@ -222,6 +255,9 @@ ModelImporter:
       data:
         first: 33
         second: b05a3200
+      data:
+        first: 64
+        second: 08a86100
     Line001:
       data:
         first: 1
@@ -235,6 +271,9 @@ ModelImporter:
       data:
         first: 33
         second: ae5a3200
+      data:
+        first: 64
+        second: 1ca86100
     Line002:
       data:
         first: 1
@@ -248,6 +287,9 @@ ModelImporter:
       data:
         first: 33
         second: ac5a3200
+      data:
+        first: 64
+        second: 1ea86100
     Line003:
       data:
         first: 1
@@ -261,6 +303,9 @@ ModelImporter:
       data:
         first: 33
         second: aa5a3200
+      data:
+        first: 64
+        second: 20a86100
     Line004:
       data:
         first: 1
@@ -274,6 +319,9 @@ ModelImporter:
       data:
         first: 33
         second: a85a3200
+      data:
+        first: 64
+        second: 22a86100
     rubbish_01:
       data:
         first: 1
@@ -287,6 +335,9 @@ ModelImporter:
       data:
         first: 33
         second: a65a3200
+      data:
+        first: 64
+        second: 12a86100
     rubbish_02:
       data:
         first: 1
@@ -300,6 +351,9 @@ ModelImporter:
       data:
         first: 33
         second: a45a3200
+      data:
+        first: 64
+        second: 14a86100
     rubbish_03:
       data:
         first: 1
@@ -313,6 +367,9 @@ ModelImporter:
       data:
         first: 33
         second: a25a3200
+      data:
+        first: 64
+        second: 16a86100
     rubbish_04:
       data:
         first: 1
@@ -326,3 +383,6 @@ ModelImporter:
       data:
         first: 33
         second: a05a3200
+      data:
+        first: 64
+        second: 18a86100
