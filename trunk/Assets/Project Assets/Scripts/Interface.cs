@@ -62,7 +62,7 @@ public class Interface : MonoBehaviour {
 						}
 				}
 				//обработка зоны подсказки
-				else if (hit.transform.tag == "tiparea" && hit.transform.name == "firehint"){
+				else if (hit.transform.tag == "tiparea"){
 				}
 
 				else if (hit.transform.tag == "test"){
@@ -70,14 +70,23 @@ public class Interface : MonoBehaviour {
 				hit.transform.gameObject.transform.position =new Vector3 (hit.transform.position.x, hit.transform.position.y + 15, hit.transform.position.z);
 				}
 
-				if (hit.transform.name == "safe"){
-						goalText ="Hmm, i havent any idea about this";
+				if (hit.transform.name == "window"){
+						goalText ="It's locked, damn!";
 						}
 				if (hit.transform.name == "trash"){
 						goalText ="It smells like chemicals";
 						}
 				if (hit.transform.name == "Table"){
 						goalText ="Seems like someone worked hard here";
+						}
+				if (hit.transform.name == "boxwithtool"){
+						goalText ="Maybe there is something useful in this box";
+						}
+				if (hit.transform.name == "emptybox"){
+						goalText ="Nothing needed in this box";
+						}
+				if (hit.transform.name == "Stove"){
+						goalText ="This place is very cold, i should make some fire in this stove";
 						}
 				/*if (!burnedbook && hit.transform.name == "wallbutton"){
 						goalText ="It's frozen, cant push it";
