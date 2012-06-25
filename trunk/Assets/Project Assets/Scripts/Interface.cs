@@ -10,10 +10,10 @@ public class Interface : MonoBehaviour {
 	public Texture pickable;
 	public Texture interactable;
 	public string goalText;
-	bool gotbook, burnedbook;
+	bool gotplank, fireburning;
 	public RaycastHit hit;
-	public string inventoryitem;
-	Transform inventoryItemTransform;
+	public string inventoryitemName;
+	public GameObject inventoryitem;
 	Transform clone;
 	
 	void Start(){
@@ -32,62 +32,49 @@ public class Interface : MonoBehaviour {
 		Ray touchray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		Vector3 center = new Vector3(Screen.width, Screen.height, 0) / 2;
 		if (Input.GetMouseButtonDown(0) && (Vector3.Distance(Input.mousePosition, center) < 50)) {
-			Debug.Log(center.ToString());
 			if (Physics.Raycast(touchray, out hit) && hit.distance <= 3) {
 				Debug.Log("X:" + hit.transform.gameObject.ToString());
 				if (hit.transform.tag == "pickable"){
-					Transform clone;
-					inventoryitem = hit.transform.name;
-					inventoryItemTransform = hit.transform;
-					Destroy(hit.transform.collider);
-					// Если берем книгу
-					if (hit.transform.name == "Old Book"){
-						gotbook = true;
+					inventoryitemName = hit.transform.name;
+					inventoryitem = hit.transform.gameObject;
+					hit.transform.gameObject.active = false;
+					// Если берем палку
+					if (hit.transform.name == "Plank"){
+						gotplank = true;
 					}
 					// 
 					goalText ="You got: "+ hit.transform.name.ToString();
-					hit.transform.renderer.enabled = false;
-					//Destroy(hit.transform.gameObject);
-					Instantiate(explosionPrefab, hit.transform.position, transform.rotation);
 				}
 				
 				//обработка места использования тула
 				else if (hit.transform.tag == "interactable"){
-					if (hit.transform.name == "Fire"){
-						if (gotbook){
+					if (hit.transform.name == "Stove"){
+						if (gotplank){
 							goalText ="Duh, it will keep fire burning a little more.";
-							burnedbook = true;
-							inventoryitem = null;
-							clone = Instantiate(inventoryItemTransform, hit.transform.position, transform.rotation) as Transform;
-							clone.transform.renderer.enabled = true;
+							fireburning = true;
+							inventoryitemName = null;
+							inventoryitem.gameObject.active = true;
+						//	inventoryitem.gameObject.transform.position = hit.transform.position;
+							Instantiate(explosionPrefab, hit.transform.position, transform.rotation);
+							}
 						}
-						if (burnedbook){
-							GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-       						sphere.transform.position = hit.transform.position;
-							sphere.transform.localScale = new Vector3 (10,10,10);
-							sphere.collider.isTrigger = true;
-							Destroy(sphere.renderer);
-						}
-
-					Instantiate(explosionPrefab, hit.transform.position, transform.rotation);
-					}
 				}
 				//обработка зоны подсказки
 				else if (hit.transform.tag == "tiparea" && hit.transform.name == "firehint"){
-					if (gotbook){
-						goalText ="Fire is fading, let me keep it a little more.";
-						Destroy(hit.transform.gameObject);
-					}
 				}
-				if (hit.transform.name == "grid"){
-						goalText ="Hmm, i havent any idea about this grid";
+
+				if (hit.transform.name == "safe"){
+						goalText ="Hmm, i havent any idea about this";
 						}
-				if (hit.transform.name == "bench"){
-						goalText ="I think I should not just laying there";
+				if (hit.transform.name == "trash"){
+						goalText ="It smells like chemicals";
 						}
-				if (!burnedbook && hit.transform.name == "wallbutton"){
+				if (hit.transform.name == "Table"){
+						goalText ="Seems like someone worked hard here";
+						}
+				/*if (!burnedbook && hit.transform.name == "wallbutton"){
 						goalText ="It's frozen, cant push it";
-						}
+						}*/
 			}	
 		}
 	}
@@ -111,14 +98,14 @@ public class Interface : MonoBehaviour {
 		//Гуй меню
 		GUI.Box (new Rect (0,0,Screen.width/8*x,Screen.height/3), "Menu");
 		if (GUI.Button(new Rect(10, Screen.height/16*x, Screen.width/10*x, Screen.height/10), "Reload"))
-			Application.LoadLevel("first");
+			Application.LoadLevel(Application.loadedLevel);
 		if (GUI.Button(new Rect(10, Screen.height/5, Screen.width/10*x, Screen.height/10), "Exit"))
 			Application.Quit();
 		//GUI.Label(new Rect(Screen.width/2, 10, 100, 80), Input.touchCount.ToString());
 		
 		//Инвентарь
 		GUI.Box (new Rect (Screen.width-Screen.width/8*x,0,Screen.width/8*x,Screen.height/3), "Inventory");
-		GUI.Box (new Rect (Screen.width-Screen.width/8*x + 10, Screen.height/16*x, Screen.width/8*x-20,Screen.height/16-10), inventoryitem);
+		GUI.Box (new Rect (Screen.width-Screen.width/8*x + 10, Screen.height/16*x, Screen.width/8*x-20,Screen.height/16-10), inventoryitemName);
 			
 		
 	}
