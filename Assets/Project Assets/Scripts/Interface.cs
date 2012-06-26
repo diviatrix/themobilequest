@@ -31,7 +31,7 @@ public class Interface : MonoBehaviour {
 		
 		Ray touchray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		Vector3 center = new Vector3(Screen.width, Screen.height, 0) / 2;
-		if (Input.GetMouseButtonDown(0) && (Vector3.Distance(Input.mousePosition, center) < 50)) {
+		if (Input.GetMouseButtonDown(0) && (Vector3.Distance(Input.mousePosition, center) < 100)) {
 			if (Physics.Raycast(touchray, out hit) && hit.distance <= 3) {
 				Debug.Log("X:" + hit.transform.gameObject.ToString());
 				if (hit.transform.tag == "pickable"){
@@ -65,15 +65,19 @@ public class Interface : MonoBehaviour {
 				else if (hit.transform.tag == "tiparea"){
 				}
 
-				else if (hit.transform.tag == "test"){
+				else if (hit.transform.tag == "activity"){
+					hit.transform.gameObject.active = false;
+					GameObject activity;
+					activity = GameObject.Find(hit.transform.gameObject.name+"1");
+					activity.collider.enabled = true;
+					activity.renderer.enabled = true;
 				
-				hit.transform.gameObject.transform.position =new Vector3 (hit.transform.position.x, hit.transform.position.y + 15, hit.transform.position.z);
 				}
 
 				if (hit.transform.name == "window"){
 						goalText ="It's locked, damn!";
 						}
-				if (hit.transform.name == "trash"){
+				if (hit.transform.name == "Trash"){
 						goalText ="It smells like chemicals";
 						}
 				if (hit.transform.name == "Table"){
