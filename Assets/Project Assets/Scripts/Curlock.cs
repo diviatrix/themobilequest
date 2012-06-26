@@ -2,15 +2,22 @@ using UnityEngine;
 using System.Collections;
 
 public class Curlock : MonoBehaviour {
+	
+	public bool curlock;
 
-	// Use this for initialization
 	void Start () {
-	Screen.lockCursor = true;
+	curlock = true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+	if (curlock)
+			Screen.lockCursor = true;
+	if (!curlock)
+			Screen.lockCursor = false;
+		
 	if (Input.GetKeyDown(KeyCode.Escape))
 		Screen.lockCursor = false;
 	}
+	
 }
