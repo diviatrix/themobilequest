@@ -34,16 +34,17 @@ public class Interface : MonoBehaviour {
 		if (Input.GetMouseButtonDown(0) && (Vector3.Distance(Input.mousePosition, center) < 100)) {
 			if (Physics.Raycast(touchray, out hit) && hit.distance <= 3) {
 				Debug.Log("X:" + hit.transform.gameObject.ToString());
+				
+				// обработка подбирания предмета
 				if (hit.transform.tag == "pickable"){
 					inventoryitemName = hit.transform.name;
 					inventoryitem = hit.collider.gameObject;
 					Debug.Log(hit.collider.transform.position.ToString());
 					Debug.Log(hit.transform.gameObject.transform.position.ToString());
-					//hit.transform.gameObject.active = false;
 					// Если берем палку
 					if (hit.transform.name == "Plank"){
 						gotplank = true;
-					}
+						}
 					// 
 					goalText ="You got: "+ hit.transform.name.ToString();
 				}
@@ -64,7 +65,8 @@ public class Interface : MonoBehaviour {
 				//обработка зоны подсказки
 				else if (hit.transform.tag == "tiparea"){
 				}
-
+				
+				//обработка активити
 				else if (hit.transform.tag == "activity"){
 					hit.transform.gameObject.active = false;
 					GameObject activity;
@@ -73,7 +75,7 @@ public class Interface : MonoBehaviour {
 					activity.renderer.enabled = true;
 				
 				}
-
+				// обработка реплик персонажа на предметы
 				if (hit.transform.name == "window"){
 						goalText ="It's locked, damn!";
 						}
