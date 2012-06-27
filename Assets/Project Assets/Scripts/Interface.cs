@@ -17,6 +17,7 @@ public class Interface : MonoBehaviour {
 	Transform clone;
 	public bool shieldopen = false; // открыт ли щиток
 	public bool boxmoved = false; // движение коробки с мусором
+	public bool dooropen = false; // открытие двери
 	
 	void Start(){
 		explosionPrefab = GameObject.Find("GotItem").transform;
@@ -57,9 +58,16 @@ public class Interface : MonoBehaviour {
 				else if (hit.transform.tag == "interactable"){
 					if (hit.transform.name == "fireplace_clip")
 						hit.transform.GetComponent<AniStarter>().AniStart();
+					
+					if (hit.transform.name == "door" && !dooropen){
+						hit.transform.GetComponent<AniStarter>().AniStart();
+						dooropen = true;
+					}
 
-					if (hit.transform.name == "notebook")
+					if (hit.transform.name == "notebook"){
 						hit.transform.GetComponent<ChangeTexture>().Change();
+						GameObject.Find("notebook_body").transform.GetComponent<ChangeTexture>().Change();
+					}
 					
 					if (hit.transform.name == "shielddoor" && !shieldopen) {
 							hit.transform.GetComponent<AniStarter>().AniStart();
