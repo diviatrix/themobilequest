@@ -26,11 +26,11 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: .00999999978
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMesh: 0
+    optimizeMesh: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
@@ -64,6 +64,9 @@ ModelImporter:
       data:
         first: 33
         second: a65a3200
+      data:
+        first: 64
+        second: 00a86100
     Group009:
       data:
         first: 1
@@ -98,6 +101,9 @@ ModelImporter:
       data:
         first: 33
         second: a45a3200
+      data:
+        first: 64
+        second: 04a86100
     Plane019:
       data:
         first: 1
@@ -111,6 +117,9 @@ ModelImporter:
       data:
         first: 33
         second: a05a3200
+      data:
+        first: 64
+        second: 02a86100
     Plane020:
       data:
         first: 1
@@ -124,3 +133,6 @@ ModelImporter:
       data:
         first: 33
         second: a25a3200
+      data:
+        first: 64
+        second: 06a86100
