@@ -17,7 +17,7 @@ public class Interface : MonoBehaviour {
 	
 	void Start(){
 		explosionPrefab = GameObject.Find("GotItem").transform;
-
+		
 		//animation.wrapMode = WrapMode.Once;
 	}
 	
@@ -28,10 +28,10 @@ public class Interface : MonoBehaviour {
 		//Ray lookray
 		Ray lookray = Camera.main.ScreenPointToRay(new Vector2(Screen.width, Screen.height)/2); // рисую луч из центра экрана
 		if (Physics.Raycast(lookray, out lookouthit) && lookouthit.transform.tag == ("interactable") && lookouthit.distance <= 3){
-			this.transform.guiTexture.color = Color.green;
+			this.transform.guiTexture.color = new Color(0.2f,0.4f,0.4f,0.5f);
 		}
 		else 
-			this.transform.guiTexture.color = Color.gray;
+			this.transform.guiTexture.color = new Color(0.2f,0.2f,0.2f,0.5f);
 		
 		//луч при клике и его обработка
 		
