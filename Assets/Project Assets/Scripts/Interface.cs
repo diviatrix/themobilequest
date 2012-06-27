@@ -15,11 +15,12 @@ public class Interface : MonoBehaviour {
 	public string inventoryitemName;
 	public GameObject inventoryitem;
 	Transform clone;
-	public bool shieldopen;
+	public bool shieldopen = false; // открыт ли щиток
+	public bool boxmoved = false; // движение коробки с мусором
 	
 	void Start(){
 		explosionPrefab = GameObject.Find("GotItem").transform;
-		shieldopen = false;
+
 		//animation.wrapMode = WrapMode.Once;
 	}
 	
@@ -54,18 +55,26 @@ public class Interface : MonoBehaviour {
 				
 				//обработка места использования тула
 				else if (hit.transform.tag == "interactable"){
-					if (hit.transform.name == "shielddoor"){
-						if (shieldopen){
-							transform.Find("shielddoor").animation.Play();
-							}
+					if (hit.transform.name == "fireplace_clip")
+						hit.transform.GetComponent<AniStarter>().AniStart();
+
+					if (hit.transform.name == "notebook")
+						hit.transform.GetComponent<ChangeTexture>().Change();
+					
+					if (hit.transform.name == "shielddoor" && !shieldopen) {
+							hit.transform.GetComponent<AniStarter>().AniStart();
+							shieldopen = true;
+						}
+					if (hit.transform.name == "movingtrashbox" && !boxmoved) {
+						hit.transform.GetComponent<AniStarter>().AniStart();
+						boxmoved = true;
 						}
 					
 					if (hit.transform.name == "Stove"){
-						if (gotplank){
+						if (gotplank){ // неверно! переписать чтобы проверялось наличие предмета в инвентаре.
 							goalText ="Duh, it will keep fire burning a little more.";
 							fireburning = true;
 							inventoryitemName = null;
-							//inventoryitem.gameObject.active = true;
 							inventoryitem.transform.position = hit.transform.position;
 							Instantiate(explosionPrefab, hit.transform.position, transform.rotation);
 							}
@@ -80,11 +89,11 @@ public class Interface : MonoBehaviour {
 				
 				//обработка активити
 				else if (hit.transform.tag == "activity"){
-					hit.transform.gameObject.active = false;
+					/* hit.transform.gameObject.active = false;
 					GameObject activity;
 					activity = GameObject.Find(hit.transform.gameObject.name+"1");
 					activity.collider.enabled = true;
-					activity.renderer.enabled = true;
+					activity.renderer.enabled = true; */ 
 				
 				}
 				// обработка реплик персонажа на предметы
