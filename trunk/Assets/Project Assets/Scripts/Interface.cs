@@ -17,6 +17,7 @@ public class Interface : MonoBehaviour {
 	Transform clone;
 	public bool shieldopen = false; // открыт ли щиток
 	public bool boxmoved = false; // движение коробки с мусором
+	public bool boxopen = false; // открытие коробки с микросхемой
 	public bool dooropen = false; // открытие двери
 	
 	void Start(){
@@ -58,26 +59,33 @@ public class Interface : MonoBehaviour {
 				else if (hit.transform.tag == "interactable"){
 					if (hit.transform.name == "fireplace_clip")
 						hit.transform.GetComponent<AniStarter>().AniStart();
-					
+					//открываем дверь
 					if (hit.transform.name == "door" && !dooropen){
 						hit.transform.GetComponent<AniStarter>().AniStart();
 						dooropen = true;
 					}
-
+					// открываем коробку
+					if (hit.transform.name == "box_top" && !boxopen){
+						GameObject.Find("box_tech_on_table").transform.GetComponent<AniStarter>().AniStart();
+					}
+					// включаем ноут
 					if (hit.transform.name == "notebook"){
 						hit.transform.GetComponent<ChangeTexture>().Change();
 						GameObject.Find("notebook_body").transform.GetComponent<ChangeTexture>().Change();
 					}
 					
+					// открываем щиток
 					if (hit.transform.name == "shielddoor" && !shieldopen) {
 							hit.transform.GetComponent<AniStarter>().AniStart();
 							shieldopen = true;
 						}
+					
+					// отодвигаем мусор
 					if (hit.transform.name == "movingtrashbox" && !boxmoved) {
 						hit.transform.GetComponent<AniStarter>().AniStart();
 						boxmoved = true;
 						}
-					
+					// тыкаем на печку
 					if (hit.transform.name == "Stove"){
 						if (gotplank){ // неверно! переписать чтобы проверялось наличие предмета в инвентаре.
 							goalText ="Duh, it will keep fire burning a little more.";
