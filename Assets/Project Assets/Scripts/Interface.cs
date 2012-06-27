@@ -6,19 +6,14 @@ public class Interface : MonoBehaviour {
 	
 	Transform explosionPrefab;
 	public bool interact;
-	public Texture normal;
-	public Texture pickable;
-	public Texture interactable;
+	public Texture cursor;
 	public string goalText;
 	bool gotplank, fireburning;
 	public RaycastHit hit;
+	public RaycastHit lookouthit;
 	public string inventoryitemName;
 	public GameObject inventoryitem;
 	Transform clone;
-	public bool shieldopen = false; // открыт ли щиток
-	public bool boxmoved = false; // движение коробки с мусором
-	public bool boxopen = false; // открытие коробки с микросхемой
-	public bool dooropen = false; // открытие двери
 	
 	void Start(){
 		explosionPrefab = GameObject.Find("GotItem").transform;
@@ -31,7 +26,12 @@ public class Interface : MonoBehaviour {
 		
 		//луч когда смотрим, и его обработка
 		//Ray lookray
-		
+		Ray lookray = Camera.main.ScreenPointToRay(new Vector2(Screen.width, Screen.height)/2); // рисую луч из центра экрана
+		if (Physics.Raycast(lookray, out lookouthit) && lookouthit.transform.tag == ("interactable") && lookouthit.distance <= 3){
+			this.transform.guiTexture.color = Color.green;
+		}
+		else 
+			this.transform.guiTexture.color = Color.gray;
 		
 		//луч при клике и его обработка
 		
@@ -57,16 +57,19 @@ public class Interface : MonoBehaviour {
 				
 				//обработка места использования тула
 				else if (hit.transform.tag == "interactable"){
-					if (hit.transform.name == "fireplace_clip")
+					if (hit.transform.name == "fireplace_clip"){
 						hit.transform.GetComponent<AniStarter>().AniStart();
+						hit.transform.tag = "Untagged";
+					}
 					//открываем дверь
-					if (hit.transform.name == "door" && !dooropen){
+					if (hit.transform.name == "door"){
 						hit.transform.GetComponent<AniStarter>().AniStart();
-						dooropen = true;
+						hit.transform.tag = "Untagged";
 					}
 					// открываем коробку
-					if (hit.transform.name == "box_top" && !boxopen){
+					if (hit.transform.name == "box_top"){  //тут добавить условие, что коробка стоит на столе
 						GameObject.Find("box_tech_on_table").GetComponent<AniStarter>().AniStart();
+						hit.transform.tag = "Untagged";
 					}
 					// включаем ноут
 					if (hit.transform.name == "notebook"){
@@ -75,15 +78,15 @@ public class Interface : MonoBehaviour {
 					}
 					
 					// открываем щиток
-					if (hit.transform.name == "shielddoor" && !shieldopen) {
+					if (hit.transform.name == "shielddoor") {
 							hit.transform.GetComponent<AniStarter>().AniStart();
-							shieldopen = true;
+							hit.transform.tag = "Untagged";
 						}
 					
 					// отодвигаем мусор
-					if (hit.transform.name == "movingtrashbox" && !boxmoved) {
+					if (hit.transform.name == "movingtrashbox") {
 						hit.transform.GetComponent<AniStarter>().AniStart();
-						boxmoved = true;
+						hit.transform.tag = "Untagged";
 						}
 					// тыкаем на печку
 					if (hit.transform.name == "Stove"){
