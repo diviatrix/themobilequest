@@ -66,7 +66,7 @@ public class Interface : MonoBehaviour {
 					}
 					// открываем коробку
 					if (hit.transform.name == "box_top" && !boxopen){
-						GameObject.Find("box_tech_on_table").transform.GetComponent<AniStarter>().AniStart();
+						GameObject.Find("box_tech_on_table").GetComponent<AniStarter>().AniStart();
 					}
 					// включаем ноут
 					if (hit.transform.name == "notebook"){
