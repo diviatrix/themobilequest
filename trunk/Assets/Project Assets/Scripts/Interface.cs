@@ -196,3 +196,13 @@ public class Interface : MonoBehaviour {
 		
 	}
 }
+
+/*
+ * int index;        // Порядковый номер в списке
+int rowCount = 5; // Максимальное количество в столбце
+
+int col = Math.floor(index / rowCount); // Столбец
+int row = index % rowCount;             // Строка
+
+Vector2 position = Vector2( col * 66, row * 66 ); // Позиция на экране
+*/
