@@ -4,6 +4,7 @@ using System.Collections;
 public class PickableObj : InteractObj {
 	public GameObject parentObj;
 	public GameObject geteffect;
+	public GameObject activateTrigger;
 	public Texture invtex;
 	public string objname;
 	public string pickgoal;
