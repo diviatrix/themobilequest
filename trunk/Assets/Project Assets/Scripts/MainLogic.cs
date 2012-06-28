@@ -57,9 +57,11 @@ public class MainLogic : MonoBehaviour {
 					Debug.Log(hit.collider.transform.position.ToString());
 					Debug.Log(hit.transform.gameObject.transform.position.ToString());
 					
-					if (hit.transform.GetComponent<PickableObj>() == null){
-						Debug.Log("povar");
+					if (hit.transform.GetComponent<PickableObj>() != null){
+						hit.transform.GetComponent<PickableObj>().GetItem();
 					}
+					else
+						Debug.Log("povar");
 				}
 				
 				//обработка места использования тула
