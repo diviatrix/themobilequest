@@ -3,7 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Interface : MonoBehaviour {
-	
+	public Transform mobilecontroller;
+	public Transform mobilecontrollercamera;
+	public Transform pccontroller;
+	public Transform pccontrollercamera;
 	Transform explosionPrefab;
 	public bool interact;
 	public Texture cursor;
@@ -11,16 +14,22 @@ public class Interface : MonoBehaviour {
 	bool gotplank, fireburning;
 	public RaycastHit hit;
 	public RaycastHit lookouthit;
-	public string inventoryitemName;
-	public GameObject inventoryitem;
 	Transform clone;
 	public Color normalcolor = new Color(0.1f,0.1f,0.1f,0.5f);
-	public Color lightercolor = new Color(0.1f,0.2f,0.2f,0.5f);
+	public Color lightcolor = new Color(0.1f,0.2f,0.2f,0.5f);
+	public LinkedList<string> list = new LinkedList<string>();
 	
 	void Start(){
 		explosionPrefab = GameObject.Find("GotItem").transform;
+		if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer){
+			mobilecontroller.gameObject.active = false;
+			mobilecontrollercamera.gameObject.active = false;
+		}
 		
-		//animation.wrapMode = WrapMode.Once;
+		if (Application.platform == RuntimePlatform.Android){
+			pccontroller.gameObject.active = false;
+			pccontrollercamera.gameObject.active = false;
+		}
 	}
 	
 	void Update()
@@ -30,7 +39,8 @@ public class Interface : MonoBehaviour {
 		//Ray lookray
 		Ray lookray = Camera.main.ScreenPointToRay(new Vector2(Screen.width, Screen.height)/2); // рисую луч из центра экрана
 		if (Physics.Raycast(lookray, out lookouthit) && lookouthit.transform.tag == ("interactable") && lookouthit.distance <= 3){
-			this.transform.guiTexture.color = lightercolor;
+			Color lerpcolor = Color.Lerp(normalcolor,lightcolor,Time.time);
+			this.transform.guiTexture.color = lerpcolor;
 		}
 		else 
 			this.transform.guiTexture.color = normalcolor;
@@ -45,16 +55,14 @@ public class Interface : MonoBehaviour {
 				
 				// обработка подбирания предмета
 				if (hit.transform.tag == "pickable"){
-					inventoryitemName = hit.transform.name;
-					inventoryitem = hit.collider.gameObject;
 					Debug.Log(hit.collider.transform.position.ToString());
 					Debug.Log(hit.transform.gameObject.transform.position.ToString());
-					// Если берем палку
-					if (hit.transform.name == "Plank"){
-						gotplank = true;
-						}
-					// 
 					goalText ="You got: "+ hit.transform.name.ToString();
+					
+					if (hit.transform.name == "box_tech"){
+						list.AddLast("box_tech");
+						GameObject.Find("box_tech_main").active = false;
+					}
 				}
 				
 				//обработка места использования тула
@@ -84,6 +92,11 @@ public class Interface : MonoBehaviour {
 							hit.transform.GetComponent<AniStarter>().AniStart();
 							hit.transform.tag = "Untagged";
 						}
+					// example - changed the way you kiss me.mp3
+					if (hit.transform.name == "example") {
+							hit.transform.GetComponent<example>().povar();
+							hit.transform.tag = "Untagged";
+						}
 					
 					// отодвигаем мусор
 					if (hit.transform.name == "movingtrashbox") {
@@ -92,11 +105,9 @@ public class Interface : MonoBehaviour {
 						}
 					// тыкаем на печку
 					if (hit.transform.name == "Stove"){
-						if (gotplank){ // неверно! переписать чтобы проверялось наличие предмета в инвентаре.
+						if (gotplank){ // АХИНЕЯ! переписать нормально						
 							goalText ="Duh, it will keep fire burning a little more.";
 							fireburning = true;
-							inventoryitemName = null;
-							inventoryitem.transform.position = hit.transform.position;
 							Instantiate(explosionPrefab, hit.transform.position, transform.rotation);
 							}
 						}
@@ -142,19 +153,37 @@ public class Interface : MonoBehaviour {
 					}	
 				}
 	
+	
+	// текстуры для gui
+	Texture invTexture1;
+	public Texture boxTexture;
+	public Texture mcTexture;
+	
 	void OnGUI() {
-		
-		//задаю ёмкость инвентаря, и предметы
-		  
-		var list = new LinkedList<string>();
-		list.AddLast("ef");
-		list.AddLast("efeefe");
-		//list.Count - 
 		
 		float x = 1;
 		if (Screen.width <= 480)
-			x = 2;
+		x = 2;
+		//Читаю количество предметов в инвентаре
+		int itemscount = list.Count;
+			
+		//Рисую Инвентарь
+		//GUI.DrawTexture(new Rect (Screen.width-80, 16, 64, 64), boxTexture);
+		
+		for( int i = 0; i < list.Count; i++ )
+		{
+			GUI.Box (new Rect (Screen.width-82/x, 18/x + 100 * i, 66/x, 66/x), boxTexture);
+		}
+		
+		
+			
+		
+		
+		
+		
+
 		//Goal bar
+		
 		GUI.Box(new Rect(Screen.width/8*x,0,Screen.width - Screen.width/4*x,30), goalText);
 		
 		//Гуй меню
@@ -164,11 +193,6 @@ public class Interface : MonoBehaviour {
 		if (GUI.Button(new Rect(10, Screen.height/5, Screen.width/10*x, Screen.height/10), "Exit"))
 			Application.Quit();
 		//GUI.Label(new Rect(Screen.width/2, 10, 100, 80), Input.touchCount.ToString());
-		
-		//Инвентарь
-		GUI.Box (new Rect (Screen.width-Screen.width/8*x,0,Screen.width/8*x,Screen.height/3), "Inventory");
-		GUI.Box (new Rect (Screen.width-Screen.width/8*x + 10, Screen.height/16*x, Screen.width/8*x-20,Screen.height/16-10), inventoryitemName);
-			
 		
 	}
 }
