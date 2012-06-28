@@ -24,15 +24,35 @@ public class PickableObj : InteractObj {
 	}
 	
 	// по запросу убиваем кхуям (совсем, рус.)
+	
+	public Component[] childrenrenderers; // создаю массив со всеми рендерами детишек
+	public Component[] childrencolliders; // создаю массив со всеми коллайдерами детишек
+	
 	public void GetItem(){
-		Component[] childrenrenderers;
 		if (parentObj == null) {
 			this.gameObject.renderer.enabled = false;	
+			this.gameObject.collider.enabled = false;
 		}
 		else {
-			foreach (Renderer renderer in childrenrenderers) {
-            	renderer = GetComponentsInChildren<parentObj>();
-        	}			
-		}		
+			childrenrenderers = parentObj.GetComponentsInChildren<Renderer>();
+			foreach (Renderer renderers in childrenrenderers)
+            	renderers.renderer.enabled = false;
+			
+			childrencolliders = parentObj.GetComponentsInChildren<Collider>();
+			foreach (Collider colliders in childrencolliders)
+				colliders.collider.enabled = false;
+		}
+		Instantiate (geteffect, this.transform.position, this.transform.rotation);
 	}
 } 
+
+
+ /*
+  	public Component[] hingeJoints;
+    void Example() {
+        hingeJoints = GetComponentsInChildren<HingeJoint>();
+        foreach (HingeJoint joint in hingeJoints) {
+            joint.useSpring = false;
+        }
+    }
+    */

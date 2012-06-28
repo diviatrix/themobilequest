@@ -49,7 +49,7 @@
      <Compile Include="Assets\Project Assets\Scripts\ClickableObj.cs" />
      <Compile Include="Assets\Project Assets\Scripts\Curlock.cs" />
      <Compile Include="Assets\Project Assets\Scripts\InteractObj.cs" />
-     <Compile Include="Assets\Project Assets\Scripts\Interface.cs" />
+     <Compile Include="Assets\Project Assets\Scripts\MainLogic.cs" />
      <Compile Include="Assets\Project Assets\Scripts\PickableObj.cs" />
      <Compile Include="Assets\Project Assets\Scripts\UsableObj.cs" />
      <Compile Include="Assets\Project Assets\Scripts\example.cs" />
