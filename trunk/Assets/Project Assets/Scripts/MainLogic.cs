@@ -7,19 +7,23 @@ public class MainLogic : MonoBehaviour {
 	public Transform mobilecontrollercamera;
 	public Transform pccontroller;
 	public Transform pccontrollercamera;
-	Transform clone;
+
 	public bool interact;
 	public Texture cursor;
 	public string goalText;
 	public RaycastHit hit;
 	public RaycastHit lookouthit;
 	
+	Component itemScript;
+	Texture newitemTex;
+	
 	public Color normalcolor = new Color(0.1f,0.1f,0.1f,0.5f);
 	public Color lightcolor = new Color(0.1f,0.2f,0.2f,0.5f);
-	public LinkedList<string> list = new LinkedList<string>();
+	public LinkedList<string> inventorylist = new LinkedList<string>();
+	//public ArrayList<string> inventoryitems = new ArrayList<string>();
 	
 	void Start(){
-		//explosionPrefab = GameObject.Find("GotItem").transform;
+	// если играем на андроиде выключить пк контроллер и наоборот
 		if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer){
 			mobilecontroller.gameObject.active = false;
 			mobilecontrollercamera.gameObject.active = false;
@@ -52,20 +56,15 @@ public class MainLogic : MonoBehaviour {
 			if (Physics.Raycast(touchray, out hit) && hit.distance <= 3) { // рисуем физический луч, который выходит из точки прикосновения к экрану и перпендикулярно плоскости камеры, он даёт точку прикосновения с физическим объектом - hit, если дистанция меньше 3 
 				Debug.Log("X:" + hit.transform.gameObject.ToString()); // и пишет имя объекта
 				
-				// обработка подбирания предмета
-				if (hit.transform.tag == "pickable"){
-					Debug.Log(hit.collider.transform.position.ToString());
-					Debug.Log(hit.transform.gameObject.transform.position.ToString());
-					
-					if (hit.transform.GetComponent<PickableObj>() != null){
-						hit.transform.GetComponent<PickableObj>().GetItem();
-					}
-					else
-						Debug.Log("povar");
+				if (hit.transform.GetComponent<PickableObj>() != null){
+					hit.transform.GetComponent<PickableObj>().GetItem();
+					newitemTex = hit.transform.GetComponent<PickableObj>().invtex;
+					inventorylist.AddLast (hit.transform.GetComponent<PickableObj>().objname);
+					goalText = hit.transform.GetComponent<PickableObj>().pickgoal;
 				}
 				
 				//обработка места использования тула
-				else if (hit.transform.tag == "interactable"){
+				if (hit.transform.tag == "interactable"){
 					if (hit.transform.name == "fireplace_clip"){
 						hit.transform.GetComponent<AniStarter>().AniStart();
 						hit.transform.tag = "Untagged";
@@ -123,39 +122,27 @@ public class MainLogic : MonoBehaviour {
 					activity.renderer.enabled = true; */ 
 				
 				}
-				// обработка реплик персонажа на предметы
-				if (hit.transform.name == "window"){
-						goalText ="It's locked, damn!";
-						}
-				if (hit.transform.name == "Trash"){
-						goalText ="It smells like chemicals";
-						}
-				if (hit.transform.name == "Table"){
-						goalText ="Seems like someone worked hard here";
-						}
-				if (hit.transform.name == "boxwithtool"){
-						goalText ="Maybe there is something useful in this box";
-						}
-				if (hit.transform.name == "emptybox"){
-						goalText ="Nothing needed in this box";
-						}
-				if (hit.transform.name == "Stove"){
-						goalText ="This place is very cold, i should make some fire in this stove";
-						}
-				/*if (!burnedbook && hit.transform.name == "wallbutton"){
-						goalText ="It's frozen, cant push it";
-						}*/
-					}	
-				}
+			
+			// обработка реплик персонажа на предметы
+			if (hit.transform.GetComponent<GoalText>()) {
+				// не готов к активити
+				if (hit.transform.GetComponent<GoalText>())
+					goalText = hit.transform.GetComponent<GoalText>().gtextbefore;
+				// готов к активити
+				else if (hit.transform.GetComponent<GoalText>().activityready)
+					goalText = hit.transform.GetComponent<GoalText>().gtextready;
+				// после активити
+				else if (hit.transform.GetComponent<GoalText>().activitydone)
+					goalText = hit.transform.GetComponent<GoalText>().gtextdone;
+			}
+		}	
+	}
 	
 	
-	// текстуры для gui
-	Texture invTexture1;
-	public Texture boxTexture;
-	public Texture mcTexture;
 	
 	void OnGUI() {
 		
+		// скейл для gui
 		float x = 1;
 		if (Screen.width <= 480)
 		x = 2;
@@ -174,9 +161,9 @@ public class MainLogic : MonoBehaviour {
 		
 		//Читаю количество предметов в инвентаре, беру названия, ищу для них объекты, читаю из объектов текстуры
 		// создаю для них боксы 64
-		for( int i = 0; i < list.Count; i++ )
+		for( int i = 0; i < inventorylist.Count; i++ )
 		{
-			GUI.Box (new Rect (Screen.width-82/x, 18/x + 100 * i, 64/x, 64/x), boxTexture);
+			GUI.Box (new Rect (Screen.width-82/x, 18/x + 100 * i, 64/x, 64/x), newitemTex);
 		}
 		
 		
@@ -196,8 +183,6 @@ public class MainLogic : MonoBehaviour {
 			Application.LoadLevel(Application.loadedLevel);
 		if (GUI.Button(new Rect(10, Screen.height/5, Screen.width/10*x, Screen.height/10), "Exit"))
 			Application.Quit();
-		//GUI.Label(new Rect(Screen.width/2, 10, 100, 80), Input.touchCount.ToString());
-		
 	}
 }
 
