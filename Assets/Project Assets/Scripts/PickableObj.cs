@@ -30,9 +30,23 @@ public class PickableObj : InteractObj {
 	public Component[] childrencolliders; // создаю массив со всеми коллайдерами детишек
 	
 	public void GetItem(){
-		if (parentObj == null) {
-			this.gameObject.renderer.enabled = false;	
-			this.gameObject.collider.enabled = false;
+		if (activateTrigger != null) {
+			activateTrigger.gameObject.active = true;
+		}
+		if (parentObj == null) { //если нет родительского объекта
+			if (renderer != null){
+				this.gameObject.renderer.enabled = false;	// отключаем рендерер 
+				this.gameObject.collider.enabled = false;	// отключаем коллайдер
+			}
+			
+			childrenrenderers = GetComponentsInChildren<Renderer>(); // ищем рендеры детишек 
+			foreach (Renderer renderers in childrenrenderers) // каждый из них
+            	renderers.renderer.enabled = false;	// отключаем
+			
+			childrencolliders = GetComponentsInChildren<Collider>(); // то же с коллайдерами
+			foreach (Collider colliders in childrencolliders)
+				colliders.collider.enabled = false;
+			
 		}
 		else {
 			childrenrenderers = parentObj.GetComponentsInChildren<Renderer>();
