@@ -2,23 +2,26 @@ using UnityEngine;
 using System.Collections;
 
 public class PickableObj : InteractObj {
-	Transform explosionPrefab;
-	public Texture picktexture;
+	public GameObject geteffect;
+	public Texture invtex;
+	public string objname;
+	public string pickgoal;
+	
 	
 	void Start(){
-		explosionPrefab = GameObject.Find("GotItem").transform;
+		if (pickgoal == null)
+			pickgoal = "You got: " + objname;
+		
+		if (objname == null) 
+			objname = this.name;
+		
+		if (geteffect == null)
+			geteffect = GameObject.Find("standardgeteffect");
+		
 	}
 	
-	void OnGUI(){
-	if (GUI.Button(new Rect(-64, -64, 64, 64), picktexture)){
-			Destroy(gameObject);
-			Instantiate(explosionPrefab, transform.position, transform.rotation);
-			Debug.Log("drfsdf");
-		}
-	}
-	
-	protected override void OnClick()
-	{
-		base.OnClick();
+	// по запросу убиваем кхуям (совсем)
+	void DestroyItem(){
+		Destroy(this.gameObject, 1);
 	}
 }

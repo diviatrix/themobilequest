@@ -2,25 +2,24 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Interface : MonoBehaviour {
+public class MainLogic : MonoBehaviour {
 	public Transform mobilecontroller;
 	public Transform mobilecontrollercamera;
 	public Transform pccontroller;
 	public Transform pccontrollercamera;
-	Transform explosionPrefab;
+	Transform clone;
 	public bool interact;
 	public Texture cursor;
 	public string goalText;
-	bool gotplank, fireburning;
 	public RaycastHit hit;
 	public RaycastHit lookouthit;
-	Transform clone;
+	
 	public Color normalcolor = new Color(0.1f,0.1f,0.1f,0.5f);
 	public Color lightcolor = new Color(0.1f,0.2f,0.2f,0.5f);
 	public LinkedList<string> list = new LinkedList<string>();
 	
 	void Start(){
-		explosionPrefab = GameObject.Find("GotItem").transform;
+		//explosionPrefab = GameObject.Find("GotItem").transform;
 		if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer){
 			mobilecontroller.gameObject.active = false;
 			mobilecontrollercamera.gameObject.active = false;
@@ -57,11 +56,9 @@ public class Interface : MonoBehaviour {
 				if (hit.transform.tag == "pickable"){
 					Debug.Log(hit.collider.transform.position.ToString());
 					Debug.Log(hit.transform.gameObject.transform.position.ToString());
-					goalText ="You got: "+ hit.transform.name.ToString();
 					
-					if (hit.transform.name == "box_tech"){
-						list.AddLast("box_tech");
-						GameObject.Find("box_tech_main").active = false;
+					if (hit.transform.GetComponent<PickableObj>() == null){
+						Debug.Log("povar");
 					}
 				}
 				
@@ -105,11 +102,7 @@ public class Interface : MonoBehaviour {
 						}
 					// тыкаем на печку
 					if (hit.transform.name == "Stove"){
-						if (gotplank){ // АХИНЕЯ! переписать нормально						
-							goalText ="Duh, it will keep fire burning a little more.";
-							fireburning = true;
-							Instantiate(explosionPrefab, hit.transform.position, transform.rotation);
-							}
+						//	Instantiate(explosionPrefab, hit.transform.position, transform.rotation);
 						}
 					}
 				}
@@ -164,15 +157,24 @@ public class Interface : MonoBehaviour {
 		float x = 1;
 		if (Screen.width <= 480)
 		x = 2;
-		//Читаю количество предметов в инвентаре
-		int itemscount = list.Count;
-			
-		//Рисую Инвентарь
-		//GUI.DrawTexture(new Rect (Screen.width-80, 16, 64, 64), boxTexture);
 		
+						// --- И Н В Е Н Т А Р Ь --- //
+		
+		
+		//int index;        // Порядковый номер в списке
+		//int rowCount = 5; // Максимальное количество в столбце
+
+		//int col = Math.floor(index / rowCount); // Столбец
+		//int row = index % rowCount;             // Строка
+
+		//Vector2 position = Vector2( col * 66, row * 66 ); // Позиция на экране
+		
+		
+		//Читаю количество предметов в инвентаре, беру названия, ищу для них объекты, читаю из объектов текстуры
+		// создаю для них боксы 64
 		for( int i = 0; i < list.Count; i++ )
 		{
-			GUI.Box (new Rect (Screen.width-82/x, 18/x + 100 * i, 66/x, 66/x), boxTexture);
+			GUI.Box (new Rect (Screen.width-82/x, 18/x + 100 * i, 64/x, 64/x), boxTexture);
 		}
 		
 		
@@ -198,11 +200,5 @@ public class Interface : MonoBehaviour {
 }
 
 /*
- * int index;        // Порядковый номер в списке
-int rowCount = 5; // Максимальное количество в столбце
 
-int col = Math.floor(index / rowCount); // Столбец
-int row = index % rowCount;             // Строка
-
-Vector2 position = Vector2( col * 66, row * 66 ); // Позиция на экране
 */
