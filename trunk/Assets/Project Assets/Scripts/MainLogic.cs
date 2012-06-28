@@ -18,7 +18,9 @@ public class MainLogic : MonoBehaviour {
 	Texture newitemTex;
 	
 	public Color normalcolor = new Color(0.1f,0.1f,0.1f,0.5f);
-	public Color lightcolor = new Color(0.1f,0.2f,0.2f,0.5f);
+	public Color activitycolor = new Color(0.1f,0.2f,0.2f,0.5f);
+	public Color itemcolor = new Color(0.1f,0.2f,0.2f,0.5f);
+	
 	public LinkedList<string> inventorylist = new LinkedList<string>();
 	//public ArrayList<string> inventoryitems = new ArrayList<string>();
 	
@@ -41,11 +43,13 @@ public class MainLogic : MonoBehaviour {
 		//луч когда смотрим, и его обработка
 		//Ray lookray
 		Ray lookray = Camera.main.ScreenPointToRay(new Vector2(Screen.width, Screen.height)/2); // рисую луч из центра экрана
-		if (Physics.Raycast(lookray, out lookouthit) && lookouthit.transform.tag == ("interactable") && lookouthit.distance <= 3){
-			Color lerpcolor = Color.Lerp(normalcolor,lightcolor,Time.time);
-			this.transform.guiTexture.color = lerpcolor;
-		}
-		else 
+		if (Physics.Raycast(lookray, out lookouthit) && lookouthit.transform.tag == ("interactable") && lookouthit.distance <= 3)
+			this.transform.guiTexture.color = activitycolor;
+
+		else if (Physics.Raycast(lookray, out lookouthit) && lookouthit.transform.GetComponent<PickableObj>() && lookouthit.distance <= 3)
+			this.transform.guiTexture.color = itemcolor;
+			
+		else
 			this.transform.guiTexture.color = normalcolor;
 		
 		//луч при клике и его обработка
@@ -75,10 +79,10 @@ public class MainLogic : MonoBehaviour {
 						hit.transform.tag = "Untagged";
 					}
 					// открываем коробку
-					if (hit.transform.name == "box_top"){  //тут добавить условие, что коробка стоит на столе
-						GameObject.Find("box_tech_on_table").GetComponent<AniStarter>().AniStart();
-						hit.transform.tag = "Untagged";
-					}
+				//	if (hit.transform.name == "box_top"){  //тут добавить условие, что коробка стоит на столе
+				//		GameObject.Find("box_tech_on_table").GetComponent<AniStarter>().AniStart();
+				//		hit.transform.tag = "Untagged";
+				//	}
 					// включаем ноут
 					if (hit.transform.name == "notebook"){
 						hit.transform.GetComponent<ChangeTexture>().Change();
@@ -122,6 +126,9 @@ public class MainLogic : MonoBehaviour {
 					activity.renderer.enabled = true; */ 
 				
 				}
+			// обработка interact 
+			if (hit.transform.GetComponent<AniStarter>())
+				hit.transform.GetComponent<AniStarter>().AniStart();
 			
 			// обработка реплик персонажа на предметы
 			if (hit.transform.GetComponent<GoalText>()) {
