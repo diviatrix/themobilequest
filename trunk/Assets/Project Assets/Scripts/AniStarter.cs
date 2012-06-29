@@ -41,6 +41,7 @@ public class AniStarter : MonoBehaviour {
 				AudioSource.PlayClipAtPoint(picksound, this.transform.position);
 				if (anieffect != null)
 					Instantiate (anieffect, this.transform.position, this.transform.rotation);
+				this.transform.tag = "Untagged";
 			}
 		}			
 	}
@@ -49,5 +50,6 @@ public class AniStarter : MonoBehaviour {
 		AudioSource.PlayClipAtPoint(picksound, this.transform.position);
 		if (anieffect != null)
 			Instantiate (anieffect, this.transform.position, this.transform.rotation);
+		this.transform.tag = "Untagged";
 	}
 }
