@@ -41,6 +41,9 @@ public class MainLogic : MonoBehaviour {
 	
 	void Update()
 	{
+//		if (inventorylist.Find ()){
+//			Debug.Log("111");
+//		}
 		
 		//луч когда смотрим, и его обработка
 		//Ray lookray
@@ -82,11 +85,6 @@ public class MainLogic : MonoBehaviour {
 						hit.transform.GetComponent<AniStarter>().AniStart();
 						hit.transform.tag = "Untagged";
 					}
-					// открываем коробку
-				//	if (hit.transform.name == "box_top"){  //тут добавить условие, что коробка стоит на столе
-				//		GameObject.Find("box_tech_on_table").GetComponent<AniStarter>().AniStart();
-				//		hit.transform.tag = "Untagged";
-				//	}
 					// включаем ноут
 					if (hit.transform.name == "notebook"){
 						hit.transform.GetComponent<ChangeTexture>().Change();
@@ -98,12 +96,7 @@ public class MainLogic : MonoBehaviour {
 							hit.transform.GetComponent<AniStarter>().AniStart();
 							hit.transform.tag = "Untagged";
 						}
-					// example - changed the way you kiss me.mp3
-					if (hit.transform.name == "example") {
-							hit.transform.GetComponent<example>().povar();
-							hit.transform.tag = "Untagged";
-						}
-					
+				
 					// отодвигаем мусор
 					if (hit.transform.name == "movingtrashbox") {
 						hit.transform.GetComponent<AniStarter>().AniStart();
@@ -116,20 +109,6 @@ public class MainLogic : MonoBehaviour {
 					}
 				}
 
-
-				//обработка зоны подсказки
-				else if (hit.transform.tag == "tiparea"){
-				}
-				
-				//обработка активити
-				else if (hit.transform.tag == "activity"){
-					/* hit.transform.gameObject.active = false;
-					GameObject activity;
-					activity = GameObject.Find(hit.transform.gameObject.name+"1");
-					activity.collider.enabled = true;
-					activity.renderer.enabled = true; */ 
-				
-				}
 			// обработка interact 
 			if (hit.transform.GetComponent<AniStarter>())
 				hit.transform.GetComponent<AniStarter>().AniStart();
@@ -147,8 +126,7 @@ public class MainLogic : MonoBehaviour {
 					goalText = hit.transform.GetComponent<GoalText>().gtextdone;
 			}
 		}	
-	}
-	
+	}	
 	
 	
 	void OnGUI() {
@@ -177,11 +155,11 @@ public class MainLogic : MonoBehaviour {
 	//		GUI.Box (new Rect (Screen.width-82/x, 18/x + 100 * i, 64/x, 64/x), newitemTex);
 	//	}
 		
-
-		for( int i = 0; i < inventorylist.Count; i++ )
+		// рисую инвентарь.
+		for( int i = 0; i < inventorylist.Count; i++ ) // для каждого объекта в массиве
   			{
-				Texture invtexture = inventorylist[i].GetComponent<PickableObj>().invtex;
-   				GUI.Box (new Rect (Screen.width-82/x, 18/x + 80/x * i, 64/x, 64/x), invtexture);
+				Texture invtexture = inventorylist[i].GetComponent<PickableObj>().invtex; // берем текстуру
+   				GUI.Box (new Rect (Screen.width-82/x, 18/x + 80/x * i, 64/x, 64/x), invtexture); // и создаём бокс с этой текстурой 
   			}
 		
 			
@@ -206,6 +184,7 @@ public class MainLogic : MonoBehaviour {
 			Application.Quit();
 	}
 }
+
 
 /*
 
