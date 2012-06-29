@@ -176,20 +176,26 @@ public class MainLogic : MonoBehaviour {
 	//	{
 	//		GUI.Box (new Rect (Screen.width-82/x, 18/x + 100 * i, 64/x, 64/x), newitemTex);
 	//	}
+		
+
 		for( int i = 0; i < inventorylist.Count; i++ )
   			{
 				Texture invtexture = inventorylist[i].GetComponent<PickableObj>().invtex;
-   				GUI.Box (new Rect (Screen.width-82/x, 18/x + 80 * i, 64/x, 64/x), invtexture);
+   				GUI.Box (new Rect (Screen.width-82/x, 18/x + 80/x * i, 64/x, 64/x), invtexture);
   			}
 		
 			
 		
 		
 		
-		
-
+		// trash
+		if (Input.touchCount == 1){
+			if (guiTexture.HitTest(new Vector3(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y,0))){
+				GUI.Box( new Rect(Screen.width/2, Screen.height/2, 32, 32), "box");
+				}
+			}
 		//Goal bar
-		
+				
 		GUI.Box(new Rect(Screen.width/8*x,0,Screen.width - Screen.width/4*x,30), goalText);
 		
 		//Гуй меню
