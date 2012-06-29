@@ -30,13 +30,11 @@ public class MainLogic : MonoBehaviour {
 	// если играем на андроиде выключить пк контроллер и наоборот
 		if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer){
 			Destroy(mobilecontroller.gameObject);
-			Destroy(mobilecontrollercamera.gameObject);
 			mobilecontrollercamera.gameObject.active = false;
 		}
 		
 		if (Application.platform == RuntimePlatform.Android){
 			Destroy(pccontroller.gameObject);
-			Destroy(pccontrollercamera.gameObject);
 		} 
 	}
 	
@@ -120,7 +118,7 @@ public class MainLogic : MonoBehaviour {
 			// обработка реплик персонажа на предметы
 			if (hit.transform.GetComponent<GoalText>()) {
 				// не готов к активити
-				if (hit.transform.GetComponent<GoalText>())
+				if (hit.transform.GetComponent<GoalText>().activitynotready)
 					goalText = hit.transform.GetComponent<GoalText>().gtextbefore;
 				// готов к активити
 				else if (hit.transform.GetComponent<GoalText>().activityready)
