@@ -29,13 +29,14 @@ public class MainLogic : MonoBehaviour {
 	void Start(){
 	// если играем на андроиде выключить пк контроллер и наоборот
 		if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer){
-			mobilecontroller.gameObject.active = false;
+			Destroy(mobilecontroller.gameObject);
+			Destroy(mobilecontrollercamera.gameObject);
 			mobilecontrollercamera.gameObject.active = false;
 		}
 		
 		if (Application.platform == RuntimePlatform.Android){
-			pccontroller.gameObject.active = false;
-			pccontrollercamera.gameObject.active = false;
+			Destroy(pccontroller.gameObject);
+			Destroy(pccontrollercamera.gameObject);
 		} 
 	}
 	
@@ -51,10 +52,10 @@ public class MainLogic : MonoBehaviour {
 		//луч когда смотрим, и его обработка
 		//Ray lookray
 		Ray lookray = Camera.main.ScreenPointToRay(new Vector2(Screen.width, Screen.height)/2); // рисую луч из центра экрана
-		if (Physics.Raycast(lookray, out lookouthit) && lookouthit.transform.tag == ("interactable") && lookouthit.distance <= 3)
+		if (Physics.Raycast(lookray, out lookouthit) && lookouthit.transform.tag == ("interactable") && lookouthit.distance <= 2)
 			this.transform.guiTexture.color = activitycolor;
 
-		else if (Physics.Raycast(lookray, out lookouthit) && lookouthit.transform.GetComponent<PickableObj>() && lookouthit.distance <= 3)
+		else if (Physics.Raycast(lookray, out lookouthit) && lookouthit.transform.GetComponent<PickableObj>() && lookouthit.distance <= 2)
 			this.transform.guiTexture.color = itemcolor;
 			
 		else
@@ -65,7 +66,7 @@ public class MainLogic : MonoBehaviour {
 		Ray touchray = Camera.main.ScreenPointToRay(Input.mousePosition); //рисую луч из точки прикосновения к экрану
 		Vector3 center = new Vector3(Screen.width, Screen.height, 0) / 2; // задаём вектор - центр экрана, для вычисления ареашки обработки тыка
 		if (Input.GetMouseButtonDown(0) && (Vector3.Distance(Input.mousePosition, center) < 100)) { // если ткнул пальцем И дистанция от центра не больше 100 пикселей, то
-			if (Physics.Raycast(touchray, out hit) && hit.distance <= 3) { // рисуем физический луч, который выходит из точки прикосновения к экрану и перпендикулярно плоскости камеры, он даёт точку прикосновения с физическим объектом - hit, если дистанция меньше 3 
+			if (Physics.Raycast(touchray, out hit) && hit.distance <= 2) { // рисуем физический луч, который выходит из точки прикосновения к экрану и перпендикулярно плоскости камеры, он даёт точку прикосновения с физическим объектом - hit, если дистанция меньше 3 
 				Debug.Log("X:" + hit.transform.gameObject.ToString()); // и пишет имя объекта
 				
 			if (hit.transform.GetComponent<PickableObj>() != null)
