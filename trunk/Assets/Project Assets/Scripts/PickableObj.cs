@@ -20,7 +20,7 @@ public class PickableObj : InteractObj {
 			objname = this.name;
 		
 		if (geteffect == null)
-			geteffect = GameObject.Find("standardgeteffect");
+			geteffect = GameObject.Find("GotItem");
 		
 	}
 	
@@ -29,7 +29,9 @@ public class PickableObj : InteractObj {
 	public Component[] childrenrenderers; // создаю массив со всеми рендерами детишек
 	public Component[] childrencolliders; // создаю массив со всеми коллайдерами детишек
 	
-	public void GetItem(){
+	public void GetItem()
+	{
+		
 		if (activateTrigger != null) {
 			activateTrigger.gameObject.active = true;
 		}
@@ -48,7 +50,7 @@ public class PickableObj : InteractObj {
 				colliders.collider.enabled = false;
 			
 		}
-		else {
+		else { //esli yest papka
 			childrenrenderers = parentObj.GetComponentsInChildren<Renderer>();
 			foreach (Renderer renderers in childrenrenderers)
             	renderers.renderer.enabled = false;
