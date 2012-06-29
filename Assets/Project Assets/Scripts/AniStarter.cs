@@ -6,10 +6,12 @@ public class AniStarter : MonoBehaviour {
 	public bool reanimatable = false;
 	public bool animated = false;
 	public AudioClip picksound;
+	public GameObject anieffect;
 	
 	
 	void Start () 
 	{
+		
 		if (picksound == null)
 			picksound = GameObject.Find("GotItem").audio.clip;
 	}
@@ -23,6 +25,7 @@ public class AniStarter : MonoBehaviour {
 			{
 				animation.Play();
 				AudioSource.PlayClipAtPoint(picksound, this.transform.position);
+				Instantiate (anieffect, this.transform.position, this.transform.rotation);
 			}
 		}
 		else if (!reanimatable && !animated){
@@ -34,11 +37,13 @@ public class AniStarter : MonoBehaviour {
 				animation.Play();
 				animated = true;
 				AudioSource.PlayClipAtPoint(picksound, this.transform.position);
+				Instantiate (anieffect, this.transform.position, this.transform.rotation);
 			}
 		}			
 	}
 	public void AniStartTarget () {
 		this.animation.Play();
 		AudioSource.PlayClipAtPoint(picksound, this.transform.position);
+		Instantiate (anieffect, this.transform.position, this.transform.rotation);
 	}
 }
