@@ -80,6 +80,10 @@ public class MainLogic : MonoBehaviour {
 			if (hit.transform.GetComponent<AniStarter>())
 				hit.transform.GetComponent<AniStarter>().AniStart();
 			
+			// обработка смены текстуры
+			if (hit.transform.GetComponent<ChangeTexture>())
+				hit.transform.GetComponent<ChangeTexture>().Change();
+			
 			// обработка реплик персонажа на предметы
 			if (hit.transform.GetComponent<GoalText>()) {
 				// не готов к активити
