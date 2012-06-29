@@ -15,9 +15,5 @@ public class Curlock : MonoBehaviour {
 			Screen.lockCursor = true;
 	if (!curlock)
 			Screen.lockCursor = false;
-		
-	if (Input.GetKeyDown(KeyCode.Escape))
-		Screen.lockCursor = false;
-	}
-	
+	}	
 }
