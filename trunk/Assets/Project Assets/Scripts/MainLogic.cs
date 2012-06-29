@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class MainLogic : MonoBehaviour {
+	
+	// задаём контроллер для отключения на нужной платформе.
 	public Transform mobilecontroller;
 	public Transform mobilecontrollercamera;
 	public Transform pccontroller;
 	public Transform pccontrollercamera;
 
-	public bool interact;
 	public Texture cursor;
 	public string goalText;
 	public RaycastHit hit;
@@ -21,7 +22,8 @@ public class MainLogic : MonoBehaviour {
 	public Color activitycolor = new Color(0.1f,0.2f,0.2f,0.5f);
 	public Color itemcolor = new Color(0.1f,0.2f,0.2f,0.5f);
 	
-	public LinkedList<string> inventorylist = new LinkedList<string>();
+	public List<GameObject> invlist = new List<GameObject>();
+	public List<GameObject> inventorylist = new List<GameObject>();
 	//public ArrayList<string> inventoryitems = new ArrayList<string>();
 	
 	void Start(){
@@ -34,7 +36,7 @@ public class MainLogic : MonoBehaviour {
 		if (Application.platform == RuntimePlatform.Android){
 			pccontroller.gameObject.active = false;
 			pccontrollercamera.gameObject.active = false;
-		}
+		} 
 	}
 	
 	void Update()
@@ -60,15 +62,23 @@ public class MainLogic : MonoBehaviour {
 			if (Physics.Raycast(touchray, out hit) && hit.distance <= 3) { // рисуем физический луч, который выходит из точки прикосновения к экрану и перпендикулярно плоскости камеры, он даёт точку прикосновения с физическим объектом - hit, если дистанция меньше 3 
 				Debug.Log("X:" + hit.transform.gameObject.ToString()); // и пишет имя объекта
 				
-				if (hit.transform.GetComponent<PickableObj>() != null){
+				/*if (hit.transform.GetComponent<PickableObj>() != null){
 					hit.transform.GetComponent<PickableObj>().GetItem();
 					newitemTex = hit.transform.GetComponent<PickableObj>().invtex;
 					inventorylist.AddLast (hit.transform.GetComponent<PickableObj>().objname);
 					goalText = hit.transform.GetComponent<PickableObj>().pickgoal;
-				}
+				}*/
+			if (hit.transform.GetComponent<PickableObj>() != null)
+  				{
+					var item = hit.transform.GetComponent<PickableObj>().gameObject;
+     				item.GetComponent<PickableObj>().GetItem();
+					inventorylist.Add( item );
+    				goalText = item.GetComponent<PickableObj>().pickgoal;
+   				}
 				
 				//обработка места использования тула
-				if (hit.transform.tag == "interactable"){
+				if (hit.transform.tag == "interactable")
+				{
 					if (hit.transform.name == "fireplace_clip"){
 						hit.transform.GetComponent<AniStarter>().AniStart();
 						hit.transform.tag = "Untagged";
@@ -168,11 +178,15 @@ public class MainLogic : MonoBehaviour {
 		
 		//Читаю количество предметов в инвентаре, беру названия, ищу для них объекты, читаю из объектов текстуры
 		// создаю для них боксы 64
+	//	for( int i = 0; i < inventorylist.Count; i++ )
+	//	{
+	//		GUI.Box (new Rect (Screen.width-82/x, 18/x + 100 * i, 64/x, 64/x), newitemTex);
+	//	}
 		for( int i = 0; i < inventorylist.Count; i++ )
-		{
-			GUI.Box (new Rect (Screen.width-82/x, 18/x + 100 * i, 64/x, 64/x), newitemTex);
-		}
-		
+  			{
+				Texture invtexture = inventorylist[i].GetComponent<PickableObj>().invtex;
+   				GUI.Box (new Rect (Screen.width-82/x, 18/x + 100 * i, 64/x, 64/x), invtexture);
+  			}
 		
 			
 		
