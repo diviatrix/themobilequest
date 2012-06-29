@@ -7,6 +7,7 @@ public class GoalText : MonoBehaviour {
 	public string gtextready = "When ready to activity";
 	public string gtextdone = "When done activity";
 	
+	public bool activitynotready = false;
 	public bool activityready = false;
 	public bool activitydone = false;
 	

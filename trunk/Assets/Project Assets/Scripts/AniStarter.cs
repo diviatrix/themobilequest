@@ -25,25 +25,29 @@ public class AniStarter : MonoBehaviour {
 			{
 				animation.Play();
 				AudioSource.PlayClipAtPoint(picksound, this.transform.position);
-				Instantiate (anieffect, this.transform.position, this.transform.rotation);
+				if (anieffect != null)
+					Instantiate (anieffect, this.transform.position, this.transform.rotation);
 			}
 		}
 		else if (!reanimatable && !animated){
 			if (target != null){
 				target.GetComponent<AniStarter>().AniStartTarget();
 				animated = true;
+				this.transform.tag = "Untagged";
 			}
 			else {
 				animation.Play();
 				animated = true;
 				AudioSource.PlayClipAtPoint(picksound, this.transform.position);
-				Instantiate (anieffect, this.transform.position, this.transform.rotation);
+				if (anieffect != null)
+					Instantiate (anieffect, this.transform.position, this.transform.rotation);
 			}
 		}			
 	}
 	public void AniStartTarget () {
 		this.animation.Play();
 		AudioSource.PlayClipAtPoint(picksound, this.transform.position);
-		Instantiate (anieffect, this.transform.position, this.transform.rotation);
+		if (anieffect != null)
+			Instantiate (anieffect, this.transform.position, this.transform.rotation);
 	}
 }
