@@ -44,6 +44,9 @@ public class MainLogic : MonoBehaviour {
 //		if (inventorylist.Find ()){
 //			Debug.Log("111");
 //		}
+		if (Input.GetKeyDown(KeyCode.Escape)){
+			Application.Quit();
+		}
 		
 		//луч когда смотрим, и его обработка
 		//Ray lookray
