@@ -8,6 +8,7 @@ public class PickableObj : InteractObj {
 	public Texture invtex;
 	public string objname;
 	public string pickgoal;
+	public AudioClip picksound;
 	
 	
 	
@@ -22,6 +23,8 @@ public class PickableObj : InteractObj {
 		if (geteffect == null)
 			geteffect = GameObject.Find("GotItem");
 		
+		if (picksound == null)
+			picksound = GameObject.Find("GotItem").GetComponent<AudioClip>();
 	}
 	
 	// по запросу убиваем кхуям (совсем, рус.)
@@ -59,7 +62,9 @@ public class PickableObj : InteractObj {
 			foreach (Collider colliders in childrencolliders)
 				colliders.collider.enabled = false;
 		}
+		
 		Instantiate (geteffect, this.transform.position, this.transform.rotation);
+		picksound
 	}
 } 
 
