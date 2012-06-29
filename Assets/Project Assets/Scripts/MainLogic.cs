@@ -74,42 +74,7 @@ public class MainLogic : MonoBehaviour {
 					inventorylist.Add( item );
     				goalText = item.GetComponent<PickableObj>().pickgoal;
    				}
-				
-				//обработка места использования тула
-				if (hit.transform.tag == "interactable")
-				{
-					if (hit.transform.name == "fireplace_clip"){
-						hit.transform.GetComponent<AniStarter>().AniStart();
-						hit.transform.tag = "Untagged";
-					}
-					//открываем дверь
-					if (hit.transform.name == "door"){
-						hit.transform.GetComponent<AniStarter>().AniStart();
-						hit.transform.tag = "Untagged";
-					}
-					// включаем ноут
-					if (hit.transform.name == "notebook"){
-						hit.transform.GetComponent<ChangeTexture>().Change();
-						GameObject.Find("notebook_body").transform.GetComponent<ChangeTexture>().Change();
-					}
-					
-					// открываем щиток
-					if (hit.transform.name == "shielddoor") {
-							hit.transform.GetComponent<AniStarter>().AniStart();
-							hit.transform.tag = "Untagged";
-						}
-				
-					// отодвигаем мусор
-					if (hit.transform.name == "movingtrashbox") {
-						hit.transform.GetComponent<AniStarter>().AniStart();
-						hit.transform.tag = "Untagged";
-						}
-					// тыкаем на печку
-					if (hit.transform.name == "Stove"){
-						//	Instantiate(explosionPrefab, hit.transform.position, transform.rotation);
-						}
-					}
-				}
+			}
 
 			// обработка interact 
 			if (hit.transform.GetComponent<AniStarter>())
@@ -188,6 +153,3 @@ public class MainLogic : MonoBehaviour {
 }
 
 
-/*
-
-*/
