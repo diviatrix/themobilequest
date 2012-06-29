@@ -188,7 +188,7 @@ public class MainLogic : MonoBehaviour {
 		
 		
 		
-		// trash
+		// проверка на тыканием пальцем в текстуру круга по центру
 		if (Input.touchCount == 1){
 			if (guiTexture.HitTest(new Vector3(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y,0))){
 				GUI.Box( new Rect(Screen.width/2, Screen.height/2, 32, 32), "box");
