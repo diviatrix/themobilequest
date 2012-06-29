@@ -24,7 +24,7 @@ public class PickableObj : InteractObj {
 			geteffect = GameObject.Find("GotItem");
 		
 		if (picksound == null)
-			picksound = GameObject.Find("GotItem").GetComponent<AudioClip>();
+			picksound = GameObject.Find("GotItem").audio.clip;
 	}
 	
 	// по запросу убиваем кхуям (совсем, рус.)
@@ -64,17 +64,6 @@ public class PickableObj : InteractObj {
 		}
 		
 		Instantiate (geteffect, this.transform.position, this.transform.rotation);
-		picksound
+		AudioSource.PlayClipAtPoint(picksound, this.transform.position);
 	}
-} 
-
-
- /*
-  	public Component[] hingeJoints;
-    void Example() {
-        hingeJoints = GetComponentsInChildren<HingeJoint>();
-        foreach (HingeJoint joint in hingeJoints) {
-            joint.useSpring = false;
-        }
-    }
-    */
+}
