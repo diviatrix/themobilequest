@@ -62,12 +62,6 @@ public class MainLogic : MonoBehaviour {
 			if (Physics.Raycast(touchray, out hit) && hit.distance <= 3) { // рисуем физический луч, который выходит из точки прикосновения к экрану и перпендикулярно плоскости камеры, он даёт точку прикосновения с физическим объектом - hit, если дистанция меньше 3 
 				Debug.Log("X:" + hit.transform.gameObject.ToString()); // и пишет имя объекта
 				
-				/*if (hit.transform.GetComponent<PickableObj>() != null){
-					hit.transform.GetComponent<PickableObj>().GetItem();
-					newitemTex = hit.transform.GetComponent<PickableObj>().invtex;
-					inventorylist.AddLast (hit.transform.GetComponent<PickableObj>().objname);
-					goalText = hit.transform.GetComponent<PickableObj>().pickgoal;
-				}*/
 			if (hit.transform.GetComponent<PickableObj>() != null)
   				{
 					var item = hit.transform.GetComponent<PickableObj>().gameObject;
@@ -185,7 +179,7 @@ public class MainLogic : MonoBehaviour {
 		for( int i = 0; i < inventorylist.Count; i++ )
   			{
 				Texture invtexture = inventorylist[i].GetComponent<PickableObj>().invtex;
-   				GUI.Box (new Rect (Screen.width-82/x, 18/x + 100 * i, 64/x, 64/x), invtexture);
+   				GUI.Box (new Rect (Screen.width-82/x, 18/x + 80 * i, 64/x, 64/x), invtexture);
   			}
 		
 			
