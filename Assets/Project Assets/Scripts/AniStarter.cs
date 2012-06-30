@@ -17,7 +17,8 @@ public class AniStarter : MonoBehaviour {
 	
 	public void AniStart () 
 	{
-		if (reanimatable){
+		if (reanimatable)
+		{
 	    	if (target != null)
 				target.GetComponent<AniStarter>().AniStartTarget();
 			else 
@@ -28,13 +29,16 @@ public class AniStarter : MonoBehaviour {
 					Instantiate (anieffect, this.transform.position, this.transform.rotation);
 			}
 		}
-		else if (!reanimatable && !animated){
-			if (target != null){
+		else if (!reanimatable && !animated)
+		{
+			if (target != null)
+			{
 				target.GetComponent<AniStarter>().AniStartTarget();
 				animated = true;
 				this.transform.tag = "Untagged";
 			}
-			else {
+			else 
+			{
 				animation.Play();
 				animated = true;
 				AudioSource.PlayClipAtPoint(picksound, this.transform.position);
@@ -44,7 +48,8 @@ public class AniStarter : MonoBehaviour {
 			}
 		}			
 	}
-	public void AniStartTarget () {
+	public void AniStartTarget () 
+	{
 		this.animation.Play();
 		AudioSource.PlayClipAtPoint(picksound, this.transform.position);
 		if (anieffect != null)

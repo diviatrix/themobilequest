@@ -78,9 +78,7 @@ public class MainLogic : MonoBehaviour {
 					inventorylist.Add( item );
     				goalText = item.GetComponent<PickableObj>().pickgoal;
    				}
-			}
-
-			// обработка interact 
+						// обработка interact 
 			if (hit.transform.GetComponent<AniStarter>())
 				hit.transform.GetComponent<AniStarter>().AniStart();
 			
@@ -111,7 +109,7 @@ public class MainLogic : MonoBehaviour {
 			}
 		}	
 	}	
-	
+}
 	
 	void OnGUI() 
 	{
