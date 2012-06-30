@@ -12,7 +12,8 @@ public class PickableObj : MonoBehaviour{
 	
 	
 	
-	void Start(){
+	void Start()
+	{
 		
 		if (pickgoal == null)
 			pickgoal = "You got: " + objname;
