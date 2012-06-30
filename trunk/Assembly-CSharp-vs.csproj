@@ -48,6 +48,7 @@
      <Compile Include="Assets\Project Assets\Scripts\AudioStarter.cs" />
      <Compile Include="Assets\Project Assets\Scripts\ChangeTexture.cs" />
      <Compile Include="Assets\Project Assets\Scripts\Curlock.cs" />
+     <Compile Include="Assets\Project Assets\Scripts\EnableTrigger.cs" />
      <Compile Include="Assets\Project Assets\Scripts\GoalText.cs" />
      <Compile Include="Assets\Project Assets\Scripts\MainLogic.cs" />
      <Compile Include="Assets\Project Assets\Scripts\PickableObj.cs" />
