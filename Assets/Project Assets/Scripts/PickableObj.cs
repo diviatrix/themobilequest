@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class PickableObj : InteractObj {
+public class PickableObj : MonoBehaviour{
 	public GameObject parentObj;
 	public GameObject geteffect;
 	public GameObject activateTrigger;

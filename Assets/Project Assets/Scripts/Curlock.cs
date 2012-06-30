@@ -11,9 +11,15 @@ public class Curlock : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	if (curlock)
+		if (Input.GetKeyDown(KeyCode.Escape) && curlock)
+			curlock = false;
+		else if (Input.GetKeyDown(KeyCode.Escape) && !curlock)
+			curlock = true;
+		
+		
+		if (curlock)
 			Screen.lockCursor = true;
-	if (!curlock)
+		else if (!curlock)
 			Screen.lockCursor = false;
 	}	
 }

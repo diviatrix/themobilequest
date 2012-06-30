@@ -28,7 +28,7 @@ public class MainLogic : MonoBehaviour {
 	
 	void Start(){
 	// если играем на андроиде выключить пк контроллер и наоборот
-		if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer){
+		if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsWebPlayer){
 			Destroy(mobilecontroller.gameObject);
 			mobilecontrollercamera.gameObject.active = false;
 		}
@@ -43,9 +43,7 @@ public class MainLogic : MonoBehaviour {
 //		if (inventorylist.Find ()){
 //			Debug.Log("111");
 //		}
-		if (Input.GetKeyDown(KeyCode.Escape)){
-			Application.Quit();
-		}
+		
 		
 		//луч когда смотрим, и его обработка
 		//Ray lookray
@@ -83,6 +81,10 @@ public class MainLogic : MonoBehaviour {
 			// обработка смены текстуры
 			if (hit.transform.GetComponent<ChangeTexture>())
 				hit.transform.GetComponent<ChangeTexture>().Change();
+			
+			// обработка триггера смены громкости
+			if (hit.transform.GetComponent<VolumeChangeTrigger>())
+				hit.transform.GetComponent<VolumeChangeTrigger>().VolChange();
 			
 			// обработка реплик персонажа на предметы
 			if (hit.transform.GetComponent<GoalText>()) {
