@@ -51,6 +51,7 @@
      <Compile Include="Assets\Project Assets\Scripts\EnableTrigger.cs" />
      <Compile Include="Assets\Project Assets\Scripts\GoalText.cs" />
      <Compile Include="Assets\Project Assets\Scripts\MainLogic.cs" />
+     <Compile Include="Assets\Project Assets\Scripts\MainMenu.cs" />
      <Compile Include="Assets\Project Assets\Scripts\PickableObj.cs" />
      <Compile Include="Assets\Project Assets\Scripts\UsableObj.cs" />
      <Compile Include="Assets\Project Assets\Scripts\VolumeChangeTrigger.cs" />
