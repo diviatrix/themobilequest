@@ -19,8 +19,8 @@ public class EnableTrigger : MonoBehaviour
 	{
 		if (toActivate != null)
 		{
-			foreach (GameObject child in toActivate) 
-            	child.active = true;
+			foreach (GameObject actObj in toActivate) 
+            	actObj.active = true;
 		}
 	}
 }
