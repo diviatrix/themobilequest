@@ -1,15 +1,21 @@
 using UnityEngine;
 using System.Collections;
 
-public class EnableTrigger : MonoBehaviour {
-
+public class EnableTrigger : MonoBehaviour 
+{
+	public bool active;
 	// Use this for initialization
-	void Start () {
-	
+	void Start () 
+	{
+		if (active)
+		{
+			this.collider.enabled = true;
+		}
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
+	void ActivateTrigger()
+	{
+		
 	}
+
 }
