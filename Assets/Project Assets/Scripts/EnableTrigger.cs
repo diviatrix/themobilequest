@@ -3,19 +3,24 @@ using System.Collections;
 
 public class EnableTrigger : MonoBehaviour 
 {
-	public bool active;
+	public GameObject[] toActivate;
+	public bool activated;
 	// Use this for initialization
 	void Start () 
 	{
-		if (active)
+		if (activated)
 		{
-			this.collider.enabled = true;
+			collider.enabled = true;
+			renderer.enabled = true;
 		}
 	}
 	
-	void ActivateTrigger()
+	public void ActivateTrigger()
 	{
-		
+		if (toActivate != null)
+		{
+			foreach (GameObject child in toActivate) 
+            	child.active = true;
+		}
 	}
-
 }

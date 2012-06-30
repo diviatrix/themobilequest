@@ -9,6 +9,9 @@ public class ChangeTexture : MonoBehaviour {
 	public GameObject parentObj;
 	
 	void Start() {
+		
+		parentObj = transform.parent.gameObject;
+		
 		if (onTex == null || offTex == null)
 			Debug.LogWarning("One or both textures missing at " + this.name);
 		on = false;

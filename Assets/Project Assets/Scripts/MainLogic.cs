@@ -86,6 +86,10 @@ public class MainLogic : MonoBehaviour {
 			if (hit.transform.GetComponent<VolumeChangeTrigger>())
 				hit.transform.GetComponent<VolumeChangeTrigger>().VolChange();
 			
+			// Обработка триггера включения объекта
+			if (hit.transform.GetComponent<EnableTrigger>())
+				hit.transform.GetComponent<EnableTrigger>().ActivateTrigger();
+							
 			// обработка реплик персонажа на предметы
 			if (hit.transform.GetComponent<GoalText>()) {
 				// не готов к активити
