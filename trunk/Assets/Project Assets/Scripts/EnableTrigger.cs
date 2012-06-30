@@ -5,7 +5,8 @@ public class EnableTrigger : MonoBehaviour
 {
 	public GameObject[] whatToActivate;
 	public bool dieOnComplete = true;
-	public GameObject needToActivate;
+	public GameObject needItemToActivate;
+	public string needActionToActivate;
 
 	GameObject whereisLogic;
 		
@@ -15,19 +16,20 @@ public class EnableTrigger : MonoBehaviour
 	}
 	public void ActivateTrigger()
 	{
-//		if (whereisLogic.GetComponent<MainLogic>().inventorylist.Find(needToActivate))
-		//{
+		if (whereisLogic.GetComponent<MainLogic>().inventorylist.Find(GameObject => needItemToActivate) != null)
+		{
 			if (whatToActivate != null)
 			{
 				foreach (GameObject activateObj in whatToActivate)
 				{
             		activateObj.active = true;
+					whereisLogic.GetComponent<MainLogic>().inventorylist.Remove(needItemToActivate);
 				}
 			}
 			if (dieOnComplete)
 			{
 				Destroy(this.gameObject); 	
 			}
-		//}
+		}
 	}
 }

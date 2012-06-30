@@ -141,12 +141,12 @@ public class MainLogic : MonoBehaviour {
 	//	}
 		
 		// рисую инвентарь.
-		for( int i = 0; i < inventorylist.Count; i++ ) // для каждого объекта в массиве
-  			{
-				Texture invtexture = inventorylist[i].GetComponent<PickableObj>().invtex; // берем текстуру
-   				GUI.Box (new Rect (Screen.width-82/x, 18/x + 80/x * i, 64/x, 64/x), invtexture); // и создаём бокс с этой текстурой 
-  			}					
-		
+			for( int i = 0; i < inventorylist.Count; i++ ) // для каждого объекта в массиве
+  				{
+					Texture invtexture = inventorylist[i].GetComponent<PickableObj>().invtex; // берем текстуру
+   					GUI.Box (new Rect (Screen.width-82/x, 18/x + 80/x * i, 64/x, 64/x), invtexture); // и создаём бокс с этой текстурой 
+  				}					
+
 		// проверка на тыканием пальцем в текстуру круга по центру
 		if (Input.touchCount == 1)
 		{
