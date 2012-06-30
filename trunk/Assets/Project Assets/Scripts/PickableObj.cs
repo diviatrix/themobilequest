@@ -29,8 +29,8 @@ public class PickableObj : MonoBehaviour{
 	
 	// по запросу убиваем кхуям (совсем, рус.)
 	
-	public Component[] childrenrenderers; // создаю массив со всеми рендерами детишек
-	public Component[] childrencolliders; // создаю массив со всеми коллайдерами детишек
+	Component[] childrenrenderers; // создаю массив со всеми рендерами детишек
+	Component[] childrencolliders; // создаю массив со всеми коллайдерами детишек
 	
 	public void GetItem()
 	{

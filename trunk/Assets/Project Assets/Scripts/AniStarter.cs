@@ -11,7 +11,6 @@ public class AniStarter : MonoBehaviour {
 	
 	void Start () 
 	{
-		
 		if (picksound == null)
 			picksound = GameObject.Find("GotItem").audio.clip;
 	}
