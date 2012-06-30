@@ -10,7 +10,6 @@ public class MainLogic : MonoBehaviour {
 	public Transform pccontroller;
 	public Transform pccontrollercamera;
 
-	public Texture cursor;
 	public string goalText;
 	public RaycastHit hit;
 	public RaycastHit lookouthit;
@@ -158,11 +157,8 @@ public class MainLogic : MonoBehaviour {
 		GUI.Box(new Rect(Screen.width/8*x,0,Screen.width - Screen.width/4*x,30), goalText);
 		
 		//Гуй меню
-		GUI.Box (new Rect (0,0,Screen.width/8*x,Screen.height/3), "Menu");
-		if (GUI.Button(new Rect(10, Screen.height/16*x, Screen.width/10*x, Screen.height/10), "Reload"))
-			Application.LoadLevel(Application.loadedLevel);
-		if (GUI.Button(new Rect(10, Screen.height/5, Screen.width/10*x, Screen.height/10), "Exit"))
-			Application.Quit();
+		if (GUI.Button(new Rect(10, Screen.height/16*x, Screen.width/10*x, Screen.height/10), "To Menu"))
+			Application.LoadLevel(0);
 	}
 }
 
