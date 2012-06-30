@@ -3,24 +3,31 @@ using System.Collections;
 
 public class EnableTrigger : MonoBehaviour 
 {
-	public GameObject[] toActivate;
-	public bool activated;
-	// Use this for initialization
-	void Start () 
+	public GameObject[] whatToActivate;
+	public bool dieOnComplete = true;
+	public GameObject needToActivate;
+
+	GameObject whereisLogic;
+		
+	void Start()
 	{
-		if (activated)
-		{
-			collider.enabled = true;
-			renderer.enabled = true;
-		}
+		whereisLogic = GameObject.Find("MainLogicObject");
 	}
-	
 	public void ActivateTrigger()
 	{
-		if (toActivate != null)
-		{
-			foreach (GameObject actObj in toActivate) 
-            	actObj.active = true;
-		}
+//		if (whereisLogic.GetComponent<MainLogic>().inventorylist.Find(needToActivate))
+		//{
+			if (whatToActivate != null)
+			{
+				foreach (GameObject activateObj in whatToActivate)
+				{
+            		activateObj.active = true;
+				}
+			}
+			if (dieOnComplete)
+			{
+				Destroy(this.gameObject); 	
+			}
+		//}
 	}
 }
