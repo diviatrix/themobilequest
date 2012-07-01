@@ -21,11 +21,6 @@ public class PickableObj : MonoBehaviour{
 		if (objname == null) 
 			objname = this.name;
 		
-		if (geteffect == null)
-			geteffect = GameObject.Find("GotItem");
-		
-		if (picksound == null)
-			picksound = GameObject.Find("GotItem").audio.clip;
 	}
 	
 	// по запросу убиваем кхуям (совсем, рус.)
