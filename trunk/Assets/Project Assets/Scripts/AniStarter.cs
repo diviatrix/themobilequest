@@ -9,12 +9,6 @@ public class AniStarter : MonoBehaviour {
 	public GameObject anieffect;
 	
 	
-	void Start () 
-	{
-		if (picksound == null)
-			picksound = GameObject.Find("GotItem").audio.clip;
-	}
-	
 	public void AniStart () 
 	{
 		if (reanimatable)

@@ -24,7 +24,7 @@ public class MainMenu : MonoBehaviour
 		GUI.Box (new Rect(Screen.width/10/x*2,0, Screen.width/10/x, Screen.height/10), "Graphics");
 		if (GUI.Button(new Rect(Screen.width/10/x*2, Screen.height/16/x, Screen.width/10/x, Screen.height/10/x), "Better"))
 			QualitySettings.IncreaseLevel();
-		if (GUI.Button(new Rect(Screen.width/10/x*2, Screen.height/16/x+Screen.height/10/x*2, Screen.width/10/x, Screen.height/10/x), "Worther"))
+		if (GUI.Button(new Rect(Screen.width/10/x*2, Screen.height/16/x+Screen.height/10/x*2, Screen.width/10/x, Screen.height/10/x), "Worth"))
 			QualitySettings.DecreaseLevel();
 	}
 }

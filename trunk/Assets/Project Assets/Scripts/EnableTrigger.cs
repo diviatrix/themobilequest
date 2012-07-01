@@ -16,8 +16,7 @@ public class EnableTrigger : MonoBehaviour
 	}
 	public void ActivateTrigger()
 	{
-	//	if (whereisLogic.GetComponent<MainLogic>().inventorylist.Find(GameObject => needItemToActivate) != null )
-	foreach (GameObject needItemToActivate in whereisLogic.GetComponent<MainLogic>().inventorylist)
+	if (whereisLogic.GetComponent<MainLogic>().inventorylist.Find(GameObject => needItemToActivate)  )
 		{
 			if (whatToActivate != null)
 			{
