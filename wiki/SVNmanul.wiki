@@ -15,7 +15,7 @@
   * Через tortoise SVN сделать SVN Checkout
   * Адрес репозитория: https://subversion.assembla.com/svn/kolobok/
   * Логин к SVN - ваш e-mail. 
-  * Пароль к SVN - пароль который был задан при регистрации, либо пароль gmail.
+  * Пароль к SVN - https://www.assembla.com/user/edit/edit_account_settings
   * Запустить Unity
   * Проверить, стоит ли в Edit - Project Settings - Editor - Version Control - Meta Files
   * Зайти в папку проекта и с помощью контекстного меню SVN, сделать Add to Ignore List для папки Library
