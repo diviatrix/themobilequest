@@ -13,9 +13,9 @@
   * Во время всех манипуляций Unity должен быть выключен
   * Создать папку для скачивания проекта 
   * Через tortoise SVN сделать SVN Checkout
-  * Адрес репозитория: https://themobilequest.googlecode.com/svn/trunk/
+  * Адрес репозитория: https://subversion.assembla.com/svn/kolobok/
   * Логин к SVN - ваш e-mail. 
-  * Пароль к SVN -  http://code.google.com/hosting/settings
+  * Пароль к SVN - пароль который был задан при регистрации, либо пароль gmail.
   * Запустить Unity
   * Проверить, стоит ли в Edit - Project Settings - Editor - Version Control - Meta Files
   * Зайти в папку проекта и с помощью контекстного меню SVN, сделать Add to Ignore List для папки Library
